@@ -25,7 +25,7 @@ contract BuyMeACoffee {
         owner = payable(msg.sender);
     }
 
-    function buyCoffee(string memory _name,string memory _message) public payable  {
+    function buyCoffee(string memory _coffeeSize, string memory _name,string memory _message) public payable  {
         require(msg.value > 0,"can`t buy coffee with 0 eth");
 
         // Add the memo to storage!

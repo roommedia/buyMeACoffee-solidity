@@ -19,8 +19,8 @@ async function printBalances(addresses) {
 
 // Logs the memos stored on-chain from coffee purchases
 async function printMemos(memos) {
-  for (const { timestamp, tipper, from: tipperAddress, message } of memos) {
-    console.log(`At ${timestamp}, ${tipper} (${tipperAddress}) said: "${message}"`)
+  for (const { timestamp, name: tipper, from: tipperAddress, message, coffeeSize } of memos) {
+    console.log(`At ${timestamp}, ${tipper} (${tipperAddress}) said: "${message}" coffeeSize: (${coffeeSize})`)
   }
 }
 
@@ -37,9 +37,9 @@ async function main() {
   console.log("== start ==");
   await printBalances(addresses);
 
-  const coffeeSize = "large"
+  const coffeeSize = "1"
 
-  const tip = {value: hre.ethers.utils.parseEther(coffeeSize === "large" ? "2" : "1")};
+  const tip = {value: hre.ethers.utils.parseEther(coffeeSize)};
   await buyMeACoffee.connect(tipper).buyCoffee("Jjhon","NIce one", tip)
   await buyMeACoffee.connect(tipper2).buyCoffee("Nicols","Two onw", tip)
   await buyMeACoffee.connect(tipper3).buyCoffee("Jannie","nacie three", tip)
@@ -53,7 +53,7 @@ async function main() {
   await printBalances(addresses);
 
   console.log("== memos ==");
-  const memos =  buyMeACoffee.getMemos();
+  const memos = await buyMeACoffee.getMemos();
   printMemos(memos);
 } 
 

@@ -7,7 +7,7 @@ contract BuyMeACoffee {
         uint256 timestamp,
         string name,
         string message,
-        string coffeeSize
+        uint256 coffeeSize
     );
 
     struct Memo {
@@ -15,7 +15,7 @@ contract BuyMeACoffee {
         uint256 timestamp;
         string name;
         string message;
-        string coffeeSize;
+        uint256 coffeeSize;
     }
 
     Memo[] memos;
@@ -30,14 +30,9 @@ contract BuyMeACoffee {
     function buyCoffee(string memory _name,string memory _message) public payable  {
         require(msg.value > 0,"can`t buy coffee with 0 eth");
 
-        string memory coffeeSize;
+        uint256 coffeeSize;
 
-        if(msg.value == 1){
-            coffeeSize = "normal";
-        } 
-        if(msg.value == 2) {
-            coffeeSize = "large";
-        }
+            coffeeSize = msg.value;
 
         // Add the memo to storage!
         memos.push(

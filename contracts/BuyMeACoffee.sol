@@ -6,7 +6,8 @@ contract BuyMeACoffee {
         address indexed from,
         uint256 timestamp,
         string name,
-        string message
+        string message,
+        string coffeeSize
     );
 
     struct Memo {
@@ -14,6 +15,7 @@ contract BuyMeACoffee {
         uint256 timestamp;
         string name;
         string message;
+        string coffeeSize;
     }
 
     Memo[] memos;
@@ -25,8 +27,17 @@ contract BuyMeACoffee {
         owner = payable(msg.sender);
     }
 
-    function buyCoffee(string memory _coffeeSize, string memory _name,string memory _message) public payable  {
+    function buyCoffee(string memory _name,string memory _message) public payable  {
         require(msg.value > 0,"can`t buy coffee with 0 eth");
+
+        string memory coffeeSize;
+
+        if(msg.value == 1){
+            coffeeSize = "normal";
+        } 
+        if(msg.value == 2) {
+            coffeeSize = "large";
+        }
 
         // Add the memo to storage!
         memos.push(
@@ -34,7 +45,8 @@ contract BuyMeACoffee {
             msg.sender,
             block.timestamp,
             _name,
-            _message
+            _message,
+            coffeeSize
             )
         );
 
@@ -43,7 +55,8 @@ contract BuyMeACoffee {
             msg.sender,
             block.timestamp,
             _name,
-            _message
+            _message,
+            coffeeSize
         );
     }
 

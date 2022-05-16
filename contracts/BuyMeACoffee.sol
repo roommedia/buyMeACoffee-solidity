@@ -28,7 +28,7 @@ contract BuyMeACoffee {
     }
 
     function buyCoffee(string memory _name,string memory _message) public payable  {
-        require(msg.value > 0,"can`t buy coffee with 0 eth");
+        require(msg.value > 0,"can`t buy coffee with 0 ethereum");
 
         uint256 coffeeSize;
 

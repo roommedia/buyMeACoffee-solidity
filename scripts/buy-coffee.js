@@ -37,12 +37,15 @@ async function main() {
   console.log("== start ==");
   await printBalances(addresses);
 
-  const coffeeSize = "1"
-
-  const tip = {value: hre.ethers.utils.parseEther(coffeeSize)};
-  await buyMeACoffee.connect(tipper).buyCoffee("Jjhon","NIce one", tip)
-  await buyMeACoffee.connect(tipper2).buyCoffee("Nicols","Two onw", tip)
-  await buyMeACoffee.connect(tipper3).buyCoffee("Jannie","nacie three", tip)
+  async function buyCoffee() {
+    for(i = 0; i < 2; i++){
+      let coffeeSize = "1"
+      const tip = {value: hre.ethers.utils.parseEther(coffeeSize)};
+      await buyMeACoffee.connect(tipper).buyCoffee("Jjhon","NIce one", tip)
+      await buyMeACoffee.connect(tipper2).buyCoffee("Nicols","Two onw", tip)
+      await buyMeACoffee.connect(tipper3).buyCoffee("Jannie","nacie three", tip)
+    }
+  }
 
   console.log(" == bought coffee ==");
   await printBalances(addresses);

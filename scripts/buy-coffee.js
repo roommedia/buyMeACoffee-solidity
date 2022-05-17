@@ -25,7 +25,7 @@ async function printMemos(memos) {
 }
 
 async function main() {
-  const [owner, tipper, tipper2, tipper3] = await hre.ethers.getSigners();
+  const [owner, tipper] = await hre.ethers.getSigners();
 
   const BuyMeACoffee = await hre.ethers.getContractFactory("BuyMeACoffee");
   const buyMeACoffee = await BuyMeACoffee.deploy();
@@ -38,14 +38,16 @@ async function main() {
   await printBalances(addresses);
 
   async function buyCoffee() {
-    for(i = 0; i < 2; i++){
-      let coffeeSize = "1"
+    console.log("== buying ==")
+    for(i = 0; i < 4; i++){
+      const newTipper = await hre.ethers.getSigners();
+      let coffeeSize = Number(i) % 2 === 0 ? "1" : "2"
       const tip = {value: hre.ethers.utils.parseEther(coffeeSize)};
-      await buyMeACoffee.connect(tipper).buyCoffee("Jjhon","NIce one", tip)
-      await buyMeACoffee.connect(tipper2).buyCoffee("Nicols","Two onw", tip)
-      await buyMeACoffee.connect(tipper3).buyCoffee("Jannie","nacie three", tip)
+      await buyMeACoffee.connect(newTipper[i]).buyCoffee("Jjhon","NIce one", tip)
     }
   }
+
+  await buyCoffee()
 
   console.log(" == bought coffee ==");
   await printBalances(addresses);

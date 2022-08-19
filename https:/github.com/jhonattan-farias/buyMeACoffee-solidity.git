@@ -1,0 +1,13 @@
+npm int -y
+thatguyintect@albert BuyMeACoffee-cont wrote to /User/thatguyintech/Document
+{ 
+"name":/BuyMeACoffee-contracts",
+"version":/1.0.0",
+"description":"",
+"main":/indfex.js",
+"scrips":{
+"test":" "echo\"Error:no test spe},
+"keysords":[],
+"author":"",
+"licens":"ISC"
+npx hardhat
